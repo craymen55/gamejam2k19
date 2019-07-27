@@ -49,7 +49,9 @@ public class PlayerController : MonoBehaviour
 
     Debug.Log("Horizontal:" + Input.GetAxisRaw("Horizontal"));
     Debug.Log("Vertical:" + Input.GetAxisRaw("Vertical"));
-    Debug.Log("Fire1:" + Input.GetAxisRaw("Fire1"));
+    Debug.Log("Dash:" + Input.GetAxisRaw("Dash"));
+
+    
 
     // TODO: we may want to scale this over time?
     MvCon.SetInput(new Vector2(GetHorizontalMovement(), 0.0f));
