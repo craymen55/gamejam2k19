@@ -600,6 +600,7 @@ MonoBehaviour:
   Target: {fileID: 2137007503}
   CameraOffset: {x: 0, y: 3, z: -8}
   SmoothSpeed: 0.05
+  TransitionSpeed: 0.02
   FacingOffset: 5
 --- !u!1 &1631018345
 GameObject:

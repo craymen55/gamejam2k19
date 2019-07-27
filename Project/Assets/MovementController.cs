@@ -20,13 +20,13 @@ public class MovementController : MonoBehaviour
   public LayerMask GroundLayers;
   public float GroundCheckRadius = 0.02f;
 
-  protected Vector2 Input;
+  public Vector2 Input { get; set; }
 
   // Dash - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  
 
-  // Start is called before the first frame update
-  void Start()
+
+    // Start is called before the first frame update
+    void Start()
   {
     Rigid = GetComponent<Rigidbody>();
   }
