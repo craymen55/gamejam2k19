@@ -13,7 +13,7 @@ public class PlayerCameraCameraController : MonoBehaviour
     public float HorizontalTargetExtent = 4.0f;
 
     protected bool ShouldMoveCamera = false;
-    protected bool IsFacingRightCache = false;
+    protected float MovementState = 0.0f;
 
     protected Transform TargetTransform;
     protected Rigidbody TargetRigidbody;
@@ -29,6 +29,20 @@ public class PlayerCameraCameraController : MonoBehaviour
             TargetMovementController = Target.GetComponent<MovementController>();
             DesiredPosition = TargetTransform.position + CameraOffset;
         }
+    }
+
+    float GetMovementState(float Input)
+    {
+        if (Input > 0)
+        {
+            return 1;
+        }
+        else if (Input < 0)
+        {
+            return -1;
+        }
+
+        return 0;
     }
 
     void FixedUpdate()
@@ -54,7 +68,7 @@ public class PlayerCameraCameraController : MonoBehaviour
 
                 if (TargetMovementController)
                 {
-                    IsFacingRightCache = TargetMovementController.IsFacingRight;
+                    MovementState = GetMovementState(TargetMovementController.Input.x);
                 }
             }
         }
@@ -62,7 +76,8 @@ public class PlayerCameraCameraController : MonoBehaviour
         {
             if (TargetMovementController)
             {
-                if (IsFacingRightCache != TargetMovementController.IsFacingRight)
+                Debug.Log(MovementState.ToString() + " " + GetMovementState(TargetMovementController.Input.x).ToString());
+                if (MovementState != GetMovementState(TargetMovementController.Input.x))
                 {
                     Debug.Log("TURNING OFF CAMERA MOVEMENT");
                     ShouldMoveCamera = false;

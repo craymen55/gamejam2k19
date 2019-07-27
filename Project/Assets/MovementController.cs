@@ -49,9 +49,6 @@ public class MovementController : MonoBehaviour
     // Apply horizontal acceleration
     float XAccel = Acceleration * Input.x * Time.fixedDeltaTime;
     Rigid.velocity += XAccel * Vector3.right;
-    
-    // Reset input
-    Input = new Vector2();
   }
 
   private void Update()
