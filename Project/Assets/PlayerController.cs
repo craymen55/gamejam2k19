@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
   // DASHING - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   public float DashDuration = 0f;
   public float DashSpeed = 10f;
+  public float GroundDashSpeed = 20.0f;
   ActionState DashAction;
   float DashTimeSpent = 0.0f;
   Vector2 DashDirection;
@@ -108,7 +109,14 @@ public class PlayerController : MonoBehaviour
       DashTimeSpent += Time.fixedDeltaTime;
       float talpha = DashTimeSpent / DashDuration;
       float scalar = 1.0f - 0.5f * talpha * talpha;
-      Rigid.velocity = DashSpeed * scalar * (DashDirection + (1.0f - scalar) * Vector2.down);
+      if (DashDirection.y < 0.3f && MvCon.IsGrounded)
+      {
+        Rigid.velocity = GroundDashSpeed * scalar * Mathf.Sign(DashDirection.x) * Vector2.right;
+      }
+      else
+      {
+        Rigid.velocity = DashSpeed * scalar * (DashDirection + (1.0f - scalar) * Vector2.down);
+      }
 
       // Check if dashing is done
       if (DashTimeSpent > DashDuration)

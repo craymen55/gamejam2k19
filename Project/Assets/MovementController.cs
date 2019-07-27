@@ -32,6 +32,7 @@ public class MovementController : MonoBehaviour
   void Start()
   {
     Rigid = GetComponent<Rigidbody>();
+    IsFacingRight = true;
   }
 
   void FixedUpdate()
@@ -47,7 +48,9 @@ public class MovementController : MonoBehaviour
     float XAccel = Acceleration * Input.x * Time.fixedDeltaTime;
     Rigid.velocity += XAccel * Vector3.right;
 
-    
+    if (Input.x > 0.0f) IsFacingRight = true;
+    else if (Input.x < 0.0f) IsFacingRight = false;
+
     // Reset input
     Input = new Vector2();
   }

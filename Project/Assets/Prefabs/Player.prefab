@@ -108,9 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cf47d02822f5d4a9ddff6e08e6dc0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundSpeed: 12
-  GroundFriction: 15
-  AirSpeed: 12
+  GroundSpeed: 8
+  GroundFriction: 12
+  AirSpeed: 6
   AirFriction: 1
   GroundLayers:
     serializedVersion: 2
@@ -132,6 +132,7 @@ MonoBehaviour:
   InputGraceDuration: 0.1
   DashDuration: 0.3
   DashSpeed: 12
+  GroundDashSpeed: 20
 --- !u!1 &2842150120155975256
 GameObject:
   m_ObjectHideFlags: 0
