@@ -8,7 +8,7 @@ public class PlayerCameraCameraController : MonoBehaviour
     public Transform Target;
 
     public Vector3 CameraOffset;
-    public float SmoothSpeed = 0.125f;
+    public float SmoothSpeed = 0.005f;
 
     void Start()
     {
