@@ -33,9 +33,9 @@ public class MovementController : MonoBehaviour
 
   public void SetInput(Vector2 input)
   {
-    if (Input.x > 0.0f)
+    if (Input.x > 0f)
       IsFacingRight = true;
-    else if (Input.x < 0.0f)
+    else if (Input.x < 0f)
       IsFacingRight = false;
 
     Input = input;
@@ -46,9 +46,7 @@ public class MovementController : MonoBehaviour
     // Apply horizontal friction
     Rigid.velocity = new Vector3(Rigid.velocity.x * (1.0f - (Friction * Time.fixedDeltaTime)), Rigid.velocity.y, Rigid.velocity.z);
 
-    Debug.Log("Input:" + Input);
-    Debug.Log("Speed:" + Speed);
-    Debug.Log("Acceleration:" + Acceleration);
+    Debug.Log("IsFacingRight:" + IsFacingRight);
 
     // Apply horizontal acceleration
     float XAccel = Acceleration * Input.x * Time.fixedDeltaTime;
