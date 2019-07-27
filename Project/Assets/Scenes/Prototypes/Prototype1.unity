@@ -316,12 +316,6 @@ MonoBehaviour:
   kernelSize: 5
   lightAngle: 1
   maxDepthBias: 0.001
---- !u!4 &799085663 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2842150118959143701, guid: 3806d30b377481f4c8d723dd4bd54943,
-    type: 3}
-  m_PrefabInstance: {fileID: 2842150120109874758}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &959430679
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,9 +597,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6078277eed3976346b8a8049e1c4f6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 799085663}
+  Target: {fileID: 2137007503}
   CameraOffset: {x: 0, y: 3, z: -8}
-  SmoothSpeed: 0.125
+  SmoothSpeed: 0.05
+  FacingOffset: 5
 --- !u!1 &1631018345
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +692,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2137007503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2842150118959143689, guid: 3806d30b377481f4c8d723dd4bd54943,
+    type: 3}
+  m_PrefabInstance: {fileID: 2842150120109874758}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2842150120109874758
 PrefabInstance:
   m_ObjectHideFlags: 0
