@@ -14,15 +14,19 @@ public class MovementController : MonoBehaviour
   // as the player or AI brain bois.
   // We use this to determine movement based
   // on other tunables.
-  public float Speed = 10.0f;
-  public float Friction = 10.0f;
-  public float Acceleration { get { return Speed * Friction; } }
+  public float GroundSpeed = 10.0f;
+  public float GroundFriction = 10.0f;
+  public float GroundAcceleration { get { return GroundSpeed * GroundFriction; } }
+  public float AirSpeed = 10.0f;
+  public float AirFriction = 1.0f;
+  public float AirAcceleration { get { return AirSpeed * AirFriction; } }
+
+  public bool IsGrounded { get; set; }
   public LayerMask GroundLayers;
   public float GroundCheckRadius = 0.02f;
+  public Transform FeetPos;
 
   public Vector2 Input { get; set; }
-
-  // Dash - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
     // Start is called before the first frame update
@@ -43,19 +47,25 @@ public class MovementController : MonoBehaviour
 
   void FixedUpdate()
   {
+    // Get the appropriate movement values
+    float Friction = IsGrounded ? GroundFriction : AirFriction;
+    float Acceleration = IsGrounded ? GroundAcceleration : AirAcceleration;
+
     // Apply horizontal friction
     Rigid.velocity = new Vector3(Rigid.velocity.x * (1.0f - (Friction * Time.fixedDeltaTime)), Rigid.velocity.y, Rigid.velocity.z);
 
     // Apply horizontal acceleration
     float XAccel = Acceleration * Input.x * Time.fixedDeltaTime;
     Rigid.velocity += XAccel * Vector3.right;
+
     
     // Reset input
     Input = new Vector2();
   }
 
-  private void Update()
+  void Update()
   {
-
+    // Check whether we're grounded
+    IsGrounded = Physics.OverlapSphere(FeetPos.position, GroundCheckRadius, GroundLayers).Length > 0;
   }
 }
