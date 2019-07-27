@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputGraceDuration: 0.1
   DashDuration: 0.3
-  DashSpeed: 10
+  DashSpeed: 12
 --- !u!1 &2842150120155975256
 GameObject:
   m_ObjectHideFlags: 0

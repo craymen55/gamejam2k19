@@ -28,21 +28,10 @@ public class MovementController : MonoBehaviour
 
   public Vector2 Input { get; set; }
 
-
-    // Start is called before the first frame update
-    void Start()
+  // Start is called before the first frame update
+  void Start()
   {
     Rigid = GetComponent<Rigidbody>();
-  }
-
-  public void SetInput(Vector2 input)
-  {
-    if (Input.x > 0f)
-      IsFacingRight = true;
-    else if (Input.x < 0f)
-      IsFacingRight = false;
-
-    Input = input;
   }
 
   void FixedUpdate()

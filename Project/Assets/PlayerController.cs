@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
   };
 
   // DASHING - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  public float DashDuration = 0.5f;
-  public float DashSpeed = 10.0f;
+  public float DashDuration = 0f;
+  public float DashSpeed = 10f;
   ActionState DashAction;
   float DashTimeSpent = 0.0f;
   Vector2 DashDirection;
@@ -88,8 +88,9 @@ public class PlayerController : MonoBehaviour
   {
     // Set the horizontal movement for the character based on user input
     Vector2 moveInput = new Vector2(GetHorizontalMovement(), GetVerticalMovement());
-    MvCon.SetInput(moveInput);
-    
+    if (!DashAction.IsActive) MvCon.Input = moveInput;
+    else MvCon.Input = new Vector2();
+
     // Update dash input
     bool dashInput = UpdateAction(ref DashAction, GetDashInput());
     if(dashInput)
@@ -106,12 +107,8 @@ public class PlayerController : MonoBehaviour
     {
       DashTimeSpent += Time.fixedDeltaTime;
       float talpha = DashTimeSpent / DashDuration;
-      float scalar = 1.0f - 0.7f * talpha * talpha;
-      float dashAcceleration = scalar * DashSpeed * MvCon.AirFriction;
-      Rigid.velocity += dashAcceleration * new Vector3(DashDirection.x, DashDirection.y, 0.0f) * Time.fixedDeltaTime;
-
-      // Also counteract gravity while dashing
-      Rigid.velocity -= Physics.gravity * scalar * Time.fixedDeltaTime;
+      float scalar = 1.0f - 0.5f * talpha * talpha;
+      Rigid.velocity = DashSpeed * scalar * (DashDirection + (1.0f - scalar) * Vector2.down);
 
       // Check if dashing is done
       if (DashTimeSpent > DashDuration)
