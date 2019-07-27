@@ -15,12 +15,13 @@ public class MovementController : MonoBehaviour
   public float HAcceleration = 100.0f;
   public float HFriction = 10.0f;
   public float Speed { get { return HAcceleration / HFriction; } }
+  public LayerMask GroundLayers;
+  public float GroundCheckRadius = 0.02f;
 
   protected Vector2 Input;
-  protected bool IsGrounded;
 
-  // 
-
+  // Dash - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  
 
   // Start is called before the first frame update
   void Start()
@@ -28,34 +29,27 @@ public class MovementController : MonoBehaviour
     Rigid = GetComponent<Rigidbody>();
   }
 
-  public void TryJump()
-  {
-    if (IsGrounded)
-    {
-      Jump();
-    }
-  }
-
-  public void Jump()
-  {
-    // Jumpshitman
-  }
-
   public void SetInput(Vector2 input)
   {
     Input = input;
   }
+  
 
-  // Update is called once per frame
   void FixedUpdate()
   {
+    // Apply horizontal friction
     Rigid.velocity = new Vector3(Rigid.velocity.x * (1.0f - (HFriction * Time.fixedDeltaTime)), Rigid.velocity.y, Rigid.velocity.z);
     
+    // Apply horizontal acceleration
     float XAccel = HAcceleration * Input.x * Time.fixedDeltaTime;
-    float ZAccel = 0.0f;
-    Rigid.velocity += new Vector3(XAccel, 0.0f, ZAccel);
+    Rigid.velocity += XAccel * Vector3.right;
 
-  // Fuck you
-  Input = new Vector2();
+    // Reset input
+    Input = new Vector2();
+  }
+
+  private void Update()
+  {
+    
   }
 }
