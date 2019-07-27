@@ -7,14 +7,16 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
   protected Rigidbody Rigid;
+  
+  public bool IsFacingRight { get; set; }
 
   // Input manipulated by controllers such
   // as the player or AI brain bois.
   // We use this to determine movement based
   // on other tunables.
-  public float HAcceleration = 100.0f;
-  public float HFriction = 10.0f;
-  public float Speed { get { return HAcceleration / HFriction; } }
+  public float Speed = 10.0f;
+  public float Friction = 10.0f;
+  public float Acceleration { get { return Speed * Friction; } }
   public LayerMask GroundLayers;
   public float GroundCheckRadius = 0.02f;
 
@@ -31,17 +33,25 @@ public class MovementController : MonoBehaviour
 
   public void SetInput(Vector2 input)
   {
+    if (Input.x > 0.0f)
+      IsFacingRight = true;
+    else if (Input.x < 0.0f)
+      IsFacingRight = false;
+
     Input = input;
   }
-  
 
   void FixedUpdate()
   {
     // Apply horizontal friction
-    Rigid.velocity = new Vector3(Rigid.velocity.x * (1.0f - (HFriction * Time.fixedDeltaTime)), Rigid.velocity.y, Rigid.velocity.z);
-    
+    Rigid.velocity = new Vector3(Rigid.velocity.x * (1.0f - (Friction * Time.fixedDeltaTime)), Rigid.velocity.y, Rigid.velocity.z);
+
+    Debug.Log("Input:" + Input);
+    Debug.Log("Speed:" + Speed);
+    Debug.Log("Acceleration:" + Acceleration);
+
     // Apply horizontal acceleration
-    float XAccel = HAcceleration * Input.x * Time.fixedDeltaTime;
+    float XAccel = Acceleration * Input.x * Time.fixedDeltaTime;
     Rigid.velocity += XAccel * Vector3.right;
     
     // Reset input
@@ -50,6 +60,6 @@ public class MovementController : MonoBehaviour
 
   private void Update()
   {
-    
+
   }
 }

@@ -34,11 +34,6 @@ public class PlayerController : MonoBehaviour
       input += 1.0f;
     }
 
-    if(input > 0.0f)
-      IsFacingRight = true;
-    else if (input < 0.0f)
-      IsFacingRight = false;
-
     return input;
   }
 
