@@ -8,13 +8,14 @@ public class PlayerController : MonoBehaviour
 {
   MovementController MvCon;
 
-  public bool IsFacingRight = true;
+  public bool IsFacingRight { get; set; }
 
   // Start is called before the first frame update
   void Start()
   {
     // Set the cache for our movement controller
     MvCon = GetComponent<MovementController>();
+    IsFacingRight = true;
   }
 
   float GetHorizontalMovement()
