@@ -19,18 +19,23 @@ public class PlayerController : MonoBehaviour
   };
 
   // DASH ATTACK - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  public float DashDuration = 0f;
+  public float DashDuration = 0.5f;
   public float DashSpeed = 10f;
   public float GroundDashSpeed = 20.0f;
-  public float GroundAttackOffset = 0.5f;
+  public float AttackWindupTime = 0.02f; // Time until attack starts
+  public float AttackStopTime = 0.2f; // Time until attack stops (delay after this)
   ActionState DashAttackAction;
-  float DashTimeSpent = 0.0f;
+  float DashTimeSpent;
   Vector2 DashDirection;
 
   public Transform MeleeHitbox;
   float MeleeOffset;
 
   // ATTACK RECOIL - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // If an attack makes contact, it gets short-circuited and becomes a recoil instead
+  public float RecoilDuration = 0.1f;
+  public float RecoilSpeed = 5f;
+  bool IsRecoilActive;
 
   // Start is called before the first frame update
   void Start()
@@ -113,30 +118,64 @@ public class PlayerController : MonoBehaviour
   {
     if (DashAttackAction.IsActive)
     {
-      DashTimeSpent += Time.fixedDeltaTime;
-      float talpha = DashTimeSpent / DashDuration;
-      float scalar = 1.0f - 0.5f * talpha * talpha;
-      if (DashDirection.y < 0.3f && MvCon.IsGrounded)
+      if (IsRecoilActive)
       {
-        Rigid.velocity = GroundDashSpeed * scalar * Mathf.Sign(DashDirection.x) * Vector2.right;
+        FixedUpdateRecoil();
       }
+      // Normal dash attack action
       else
       {
-        Rigid.velocity = DashSpeed * scalar * (DashDirection + (1.0f - scalar) * Vector2.down);
+        FixedUpdateDashAttack();
       }
+    }
+  }
 
-      // Check if dashing is done
-      if (DashTimeSpent > DashDuration)
-      {
-        DashAttackAction.IsActive = false;
-      }
+  void FixedUpdateDashAttack()
+  {
+    DashTimeSpent += Time.fixedDeltaTime;
+    float talpha = DashTimeSpent / DashDuration;
+    float scalar = 1.0f - 0.5f * talpha * talpha;
+    if (DashDirection.y < 0.3f && MvCon.IsGrounded)
+    {
+      Vector2 direction = Mathf.Sign(DashDirection.x) * Vector2.right;
+      Rigid.velocity = GroundDashSpeed * scalar * direction;
+      MeleeHitbox.transform.localPosition = MeleeOffset * direction;
+    }
+    else
+    {
+      Rigid.velocity = DashSpeed * scalar * (DashDirection + (1.0f - scalar) * Vector2.down);
+      MeleeHitbox.transform.localPosition = MeleeOffset * DashDirection;
+    }
+
+    // Check if dashing is done
+    if (DashTimeSpent > DashDuration)
+    {
+      DashAttackAction.IsActive = false;
+    }
+  }
+
+  void FixedUpdateRecoil()
+  {
+    DashTimeSpent += Time.fixedDeltaTime;
+    float talpha = DashTimeSpent / RecoilDuration;
+    float scalar = 1.0f - 0.5f * talpha * talpha;
+    Vector2 direction = -DashDirection + 0.3f * Vector2.up;
+    Rigid.velocity = RecoilSpeed * scalar * direction;
+    if(DashTimeSpent > RecoilDuration)
+    {
+      IsRecoilActive = false;
+      DashAttackAction.IsActive = false;
     }
   }
 
   #region Melee
   public void OnMeleeHit(Collider other)
   {
-
+    if(DashAttackAction.IsActive && DashTimeSpent > AttackWindupTime && DashTimeSpent < AttackStopTime)
+    {
+      IsRecoilActive = true;
+      DashTimeSpent = 0.0f;
+    }
   }
   #endregion
 }
