@@ -48,6 +48,9 @@ public class MovementController : MonoBehaviour
     // Apply horizontal friction
     Rigid.velocity = new Vector3(Rigid.velocity.x * (1.0f - (Friction * Time.fixedDeltaTime)), Rigid.velocity.y, Rigid.velocity.z);
 
+    // Stay the fuck at z=0
+    transform.position = new Vector3(transform.position.x, transform.position.y);
+
     // Apply horizontal acceleration
     float XAccel = Acceleration * Input.x * Time.fixedDeltaTime;
     Rigid.velocity += XAccel * Vector3.right;

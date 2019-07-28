@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
         Current = Max;
     }
 
-    void DealDamage(float Damage)
+    public void DealDamage(float Damage)
     {
         Current = Mathf.Clamp(Current - Damage, 0, Max);
     }
@@ -21,4 +21,9 @@ public class Health : MonoBehaviour
     {
         return Current;
     }
+
+  private void Update()
+  {
+    Debug.Log(Current);
+  }
 }
