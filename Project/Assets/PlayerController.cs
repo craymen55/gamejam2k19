@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
   public float GroundDashSpeed = 20.0f;
   public float AttackWindupTime = 0.02f; // Time until attack starts
   public float AttackStopTime = 0.2f; // Time until attack stops (delay after this)
+  public float MeleeDamage = 10.0f;
   ActionState DashAttackAction;
   float DashTimeSpent;
   Vector2 DashDirection;
@@ -175,6 +176,11 @@ public class PlayerController : MonoBehaviour
     {
       IsRecoilActive = true;
       DashTimeSpent = 0.0f;
+      Health otherHealth = other.GetComponent<Health>();
+      if (otherHealth)
+      {
+        otherHealth.DealDamage(MeleeDamage);
+      }
     }
   }
   #endregion
