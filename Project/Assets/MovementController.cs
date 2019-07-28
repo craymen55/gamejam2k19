@@ -41,15 +41,16 @@ public class MovementController : MonoBehaviour
     float Friction = IsGrounded ? GroundFriction : AirFriction;
     float Acceleration = IsGrounded ? GroundAcceleration : AirAcceleration;
 
+    // Update facing
+    if (Input.x > 0.0f) IsFacingRight = true;
+    else if (Input.x < 0.0f) IsFacingRight = false;
+
     // Apply horizontal friction
     Rigid.velocity = new Vector3(Rigid.velocity.x * (1.0f - (Friction * Time.fixedDeltaTime)), Rigid.velocity.y, Rigid.velocity.z);
 
     // Apply horizontal acceleration
     float XAccel = Acceleration * Input.x * Time.fixedDeltaTime;
     Rigid.velocity += XAccel * Vector3.right;
-
-    if (Input.x > 0.0f) IsFacingRight = true;
-    else if (Input.x < 0.0f) IsFacingRight = false;
   }
 
   void Update()

@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cf47d02822f5d4a9ddff6e08e6dc0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundSpeed: 8
-  GroundFriction: 12
+  GroundSpeed: 12
+  GroundFriction: 6
   AirSpeed: 6
   AirFriction: 1
   GroundLayers:

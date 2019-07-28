@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
   void FixedUpdate()
   {
-    if(DashAction.IsActive)
+    if (DashAction.IsActive)
     {
       DashTimeSpent += Time.fixedDeltaTime;
       float talpha = DashTimeSpent / DashDuration;
