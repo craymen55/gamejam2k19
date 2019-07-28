@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
   #region Melee
   public void OnMeleeHit(Collider other)
   {
-    if(DashAttackAction.IsActive && DashTimeSpent > AttackWindupTime && DashTimeSpent < AttackStopTime)
+    if(DashAttackAction.IsActive && DashTimeSpent > AttackWindupTime && DashTimeSpent < AttackStopTime && !IsRecoilActive)
     {
       IsRecoilActive = true;
       DashTimeSpent = 0.0f;
