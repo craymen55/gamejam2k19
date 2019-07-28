@@ -105,3 +105,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Max: 50
+  BloodSplatPrefab: {fileID: 9156225548591889510, guid: 0f045d5a26b4a7541b4b77276ef3afb0,
+    type: 3}

@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    protected float Current = 50;
-    public float Max = 50;
-    
-    void Start()
-    {
-        Current = Max;
-    }
+  protected float Current = 50;
+  public float Max = 50;
 
-    public void DealDamage(float Damage)
-    {
-        Current = Mathf.Clamp(Current - Damage, 0, Max);
-    }
+  public GameObject BloodSplatPrefab;
 
-    float Get()
-    {
-        return Current;
-    }
-
-  private void Update()
+  void Start()
   {
-    Debug.Log(Current);
+    Current = Max;
+  }
+
+  public void DealDamage(float Damage)
+  {
+    Current = Mathf.Clamp(Current - Damage, 0, Max);
+  }
+
+  float Get()
+  {
+    return Current;
   }
 }

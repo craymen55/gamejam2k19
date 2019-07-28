@@ -180,6 +180,10 @@ public class PlayerController : MonoBehaviour
       if (otherHealth)
       {
         otherHealth.DealDamage(MeleeDamage);
+        if (otherHealth.BloodSplatPrefab)
+        {
+          Instantiate(otherHealth.BloodSplatPrefab, MeleeHitbox.transform.position, Quaternion.FromToRotation(Vector3.right, -DashDirection));
+        }
       }
     }
   }
