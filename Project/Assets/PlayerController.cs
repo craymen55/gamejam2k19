@@ -7,8 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-  protected Rigidbody Rigid;
-
+  Rigidbody Rigid;
   MovementController MvCon;
 
   public float InputGraceDuration = 0.1f;
@@ -19,19 +18,27 @@ public class PlayerController : MonoBehaviour
     public float QueueTime; // How long is left for a queued input
   };
 
-  // DASHING - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // DASH ATTACK - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   public float DashDuration = 0f;
   public float DashSpeed = 10f;
   public float GroundDashSpeed = 20.0f;
-  ActionState DashAction;
+  public float GroundAttackOffset = 0.5f;
+  ActionState DashAttackAction;
   float DashTimeSpent = 0.0f;
   Vector2 DashDirection;
+
+  public Transform MeleeHitbox;
+  float MeleeOffset;
+
+  // ATTACK RECOIL - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   // Start is called before the first frame update
   void Start()
   {
     MvCon = GetComponent<MovementController>();
     Rigid = GetComponent<Rigidbody>();
+
+    MeleeOffset = MeleeHitbox.localPosition.x;
   }
 
   #region Input
@@ -89,14 +96,14 @@ public class PlayerController : MonoBehaviour
   {
     // Set the horizontal movement for the character based on user input
     Vector2 moveInput = new Vector2(GetHorizontalMovement(), GetVerticalMovement());
-    if (!DashAction.IsActive) MvCon.Input = moveInput;
+    if (!DashAttackAction.IsActive) MvCon.Input = moveInput;
     else MvCon.Input = new Vector2();
 
     // Update dash input
-    bool dashInput = UpdateAction(ref DashAction, GetDashInput());
+    bool dashInput = UpdateAction(ref DashAttackAction, GetDashInput());
     if(dashInput && moveInput.magnitude > 0.5f)
     {
-      DashAction.IsActive = true;
+      DashAttackAction.IsActive = true;
       DashTimeSpent = 0.0f;
       DashDirection = moveInput.normalized;
     }
@@ -104,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
   void FixedUpdate()
   {
-    if (DashAction.IsActive)
+    if (DashAttackAction.IsActive)
     {
       DashTimeSpent += Time.fixedDeltaTime;
       float talpha = DashTimeSpent / DashDuration;
@@ -121,8 +128,15 @@ public class PlayerController : MonoBehaviour
       // Check if dashing is done
       if (DashTimeSpent > DashDuration)
       {
-        DashAction.IsActive = false;
+        DashAttackAction.IsActive = false;
       }
     }
   }
+
+  #region Melee
+  public void OnMeleeHit(Collider other)
+  {
+
+  }
+  #endregion
 }
