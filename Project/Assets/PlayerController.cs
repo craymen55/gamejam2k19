@@ -5,10 +5,12 @@ using UnityEngine;
 // Require a MovementController
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CharacterSprite))]
 public class PlayerController : MonoBehaviour
 {
   Rigidbody Rigid;
   MovementController MvCon;
+  CharacterSprite ChSpr;
 
   public float InputGraceDuration = 0.1f;
   struct ActionState
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
   {
     MvCon = GetComponent<MovementController>();
     Rigid = GetComponent<Rigidbody>();
+    ChSpr = GetComponent<CharacterSprite>();
 
     MeleeOffset = MeleeHitbox.localPosition.x;
   }
@@ -113,6 +116,23 @@ public class PlayerController : MonoBehaviour
       DashTimeSpent = 0.0f;
       DashDirection = moveInput.normalized;
     }
+
+    // Update animation state
+    if(DashAttackAction.IsActive || !MvCon.IsGrounded)
+    {
+      ChSpr.SetFrame(2);
+      ChSpr.SetFacing(DashDirection.x >= 0.0f);
+    }
+    else if(!Mathf.Approximately(moveInput.x, 0.0f))
+    {
+
+      ChSpr.SetFrame(1);
+      ChSpr.SetFacing(moveInput.x >= 0.0f);
+    }
+    else
+    {
+      ChSpr.SetFrame(0);
+    }
   }
 
   void FixedUpdate()
@@ -131,6 +151,7 @@ public class PlayerController : MonoBehaviour
     }
   }
 
+  #region Melee
   void FixedUpdateDashAttack()
   {
     DashTimeSpent += Time.fixedDeltaTime;
@@ -168,17 +189,16 @@ public class PlayerController : MonoBehaviour
       DashAttackAction.IsActive = false;
     }
   }
-
-  #region Melee
+  
   public void OnMeleeHit(Collider other)
   {
     if(DashAttackAction.IsActive && DashTimeSpent > AttackWindupTime && DashTimeSpent < AttackStopTime && !IsRecoilActive)
     {
-      IsRecoilActive = true;
-      DashTimeSpent = 0.0f;
       Health otherHealth = other.GetComponent<Health>();
       if (otherHealth)
       {
+        IsRecoilActive = true;
+        DashTimeSpent = 0.0f;
         otherHealth.DealDamage(MeleeDamage);
         if (otherHealth.BloodSplatPrefab)
         {
