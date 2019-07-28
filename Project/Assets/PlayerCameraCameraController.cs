@@ -19,6 +19,9 @@ public class PlayerCameraCameraController : MonoBehaviour
     protected Rigidbody TargetRigidbody;
     protected MovementController TargetMovementController;
 
+    protected float CurrentExtentOffset = 0;
+    protected float DesiredExtentOffset = 0;
+
     protected Vector3 DesiredPosition;
 
     void Start()
@@ -92,10 +95,14 @@ public class PlayerCameraCameraController : MonoBehaviour
                 // If a MovementController exists on the target, add facing offset to desired position
                 if (TargetMovementController)
                 {
-                    // Get our direction.
+                    // Get our direction, and use it to set our Desired Extent offset.
                     float Direction = TargetMovementController.IsFacingRight ? 1 : -1;
-                    DesiredPosition.x += HorizontalTargetExtent * Direction;
+                    DesiredExtentOffset = HorizontalTargetExtent * Direction;
+
+                    CurrentExtentOffset = Mathf.Lerp(CurrentExtentOffset, DesiredExtentOffset, SmoothSpeed);
+                    DesiredPosition.x += CurrentExtentOffset;
                 }
+
 
                 if (Mathf.Abs(transform.position.x - DesiredPosition.x) < 0.1)
                 {
