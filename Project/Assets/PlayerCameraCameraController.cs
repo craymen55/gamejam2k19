@@ -82,7 +82,6 @@ public class PlayerCameraCameraController : MonoBehaviour
                 Debug.Log(MovementState.ToString() + " " + GetMovementState(TargetMovementController.Input.x).ToString());
                 if (MovementState != GetMovementState(TargetMovementController.Input.x))
                 {
-                    Debug.Log("TURNING OFF CAMERA MOVEMENT");
                     ShouldMoveCamera = false;
                 }
             }
@@ -103,11 +102,15 @@ public class PlayerCameraCameraController : MonoBehaviour
                     DesiredPosition.x += CurrentExtentOffset;
                 }
 
-
                 if (Mathf.Abs(transform.position.x - DesiredPosition.x) < 0.1)
                 {
                     ShouldMoveCamera = false;
                 }
+            }
+
+            if (!ShouldMoveCamera)
+            {
+                CurrentExtentOffset = 0;
             }
         }
 
