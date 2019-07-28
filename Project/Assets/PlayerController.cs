@@ -94,11 +94,11 @@ public class PlayerController : MonoBehaviour
 
     // Update dash input
     bool dashInput = UpdateAction(ref DashAction, GetDashInput());
-    if(dashInput)
+    if(dashInput && moveInput.magnitude > 0.5f)
     {
       DashAction.IsActive = true;
       DashTimeSpent = 0.0f;
-      DashDirection = moveInput;
+      DashDirection = moveInput.normalized;
     }
   }
 
