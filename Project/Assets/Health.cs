@@ -7,6 +7,8 @@ public class Health : MonoBehaviour
   protected float Current = 50;
   public float Max = 50;
 
+  public GameObject BloodSplatPrefab;
+
   void Start()
   {
     Current = Max;
