@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
   public float AttackWindupTime = 0.02f; // Time until attack starts
   public float AttackStopTime = 0.2f; // Time until attack stops (delay after this)
   public float MeleeDamage = 10.0f;
+  public int MaxDashes = 2;
+  int DashesLeft = 0;
   ActionState DashAttackAction;
   float DashTimeSpent;
   Vector2 DashDirection;
@@ -111,13 +113,19 @@ public class PlayerController : MonoBehaviour
     if (!DashAttackAction.IsActive) MvCon.Input = moveInput;
     else MvCon.Input = new Vector2();
 
-    // Update dash input
+    // Update dash activation
     bool dashInput = UpdateAction(ref DashAttackAction, GetDashInput());
-    if(dashInput && moveInput.magnitude > 0.5f)
+    if(dashInput && moveInput.magnitude > 0.5f && DashesLeft > 0)
     {
       DashAttackAction.IsActive = true;
       DashTimeSpent = 0.0f;
       DashDirection = moveInput.normalized;
+      --DashesLeft;
+    }
+    // Regen dashes
+    if(MvCon.IsGrounded && !DashAttackAction.IsActive)
+    {
+      DashesLeft = MaxDashes;
     }
 
     // Update audio state
@@ -138,20 +146,31 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update animation state
-    if(DashAttackAction.IsActive || !MvCon.IsGrounded)
+    if(DashAttackAction.IsActive)
     {
-      ChSpr.SetFrame(2);
+      if(IsRecoilActive)
+      {
+        ChSpr.SetFrame(4);
+      }
+      else
+      {
+        ChSpr.SetFrame(3);
+      }
       ChSpr.SetFacing(DashDirection.x >= 0.0f);
+    }
+    else if(!MvCon.IsGrounded)
+    {
+      ChSpr.SetFrame(5);
     }
     else if(!Mathf.Approximately(moveInput.x, 0.0f))
     {
 
-      ChSpr.SetFrame(1);
+      ChSpr.SetFrame(0);
       ChSpr.SetFacing(moveInput.x >= 0.0f);
     }
     else
     {
-      ChSpr.SetFrame(0);
+      ChSpr.SetFrame(1);
     }
   }
 
@@ -193,6 +212,10 @@ public class PlayerController : MonoBehaviour
     if (DashTimeSpent > DashDuration)
     {
       DashAttackAction.IsActive = false;
+      if(MvCon.IsGrounded)
+      {
+        DashesLeft = MaxDashes;
+      }
     }
   }
 
@@ -227,6 +250,9 @@ public class PlayerController : MonoBehaviour
             , Quaternion.FromToRotation(Vector3.right, -DashDirection)
             );
         }
+        // Update frame and recharge dashes after landing an attack
+        ChSpr.SetFrame(4);
+        DashesLeft = MaxDashes;
       }
     }
   }

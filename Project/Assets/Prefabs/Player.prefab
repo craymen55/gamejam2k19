@@ -170,7 +170,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1763966976518359187, guid: fbf59752c10984c4881412e5cdc0861f,
+  m_Sprite: {fileID: 3769857309982954817, guid: fbf59752c10984c4881412e5cdc0861f,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -224,10 +224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cf47d02822f5d4a9ddff6e08e6dc0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundSpeed: 6
-  GroundFriction: 8
-  AirSpeed: 6
-  AirFriction: 3
+  GroundSpeed: 10
+  GroundFriction: 10
+  AirSpeed: 10
+  AirFriction: 5
   GroundLayers:
     serializedVersion: 2
     m_Bits: 2048
@@ -261,15 +261,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputGraceDuration: 0.1
-  DashDuration: 0.3
-  DashSpeed: 12
-  GroundDashSpeed: 15
+  DashDuration: 0.35
+  DashSpeed: 20
+  GroundDashSpeed: 30
   AttackWindupTime: 0.01
   AttackStopTime: 0.2
   MeleeDamage: 20
+  MaxDashes: 2
   MeleeHitbox: {fileID: 713832199581022542}
-  RecoilDuration: 0.1
-  RecoilSpeed: 8
+  RecoilDuration: 0.12
+  RecoilSpeed: 15
 --- !u!114 &6453180127463386671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,8 +284,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Frames:
-  - {fileID: -1763966976518359187, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
   - {fileID: 3769857309982954817, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
+  - {fileID: -1763966976518359187, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
   - {fileID: 7945085462364377303, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
   - {fileID: 2794544664375671111, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
   - {fileID: 6309980417782459891, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}

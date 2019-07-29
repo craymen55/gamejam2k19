@@ -766,51 +766,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143697, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: GroundSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143697, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: GroundFriction
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143697, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: AirSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143697, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: AirFriction
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143696, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: DashSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143696, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: GroundDashSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143696, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: RecoilDuration
-      value: 0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143696, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: RecoilSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842150118959143696, guid: 3806d30b377481f4c8d723dd4bd54943,
-        type: 3}
-      propertyPath: DashDuration
-      value: 0.35
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3806d30b377481f4c8d723dd4bd54943, type: 3}
 --- !u!1001 &3283985681738131959
