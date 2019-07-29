@@ -121,11 +121,18 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update audio state
-    if(moveInput.magnitude > 0.5f && !ChAu.GetMoving())
+    if (MvCon.IsGrounded && !DashAttackAction.IsActive)
     {
-      ChAu.SetMoving(true);
+      if (moveInput.magnitude > 0.5f && !ChAu.GetMoving())
+      {
+        ChAu.SetMoving(true);
+      }
+      else if (moveInput.magnitude < 0.5f && ChAu.GetMoving())
+      {
+        ChAu.SetMoving(false);
+      }
     }
-    else if(moveInput.magnitude < 0.5f && ChAu.GetMoving())
+    else
     {
       ChAu.SetMoving(false);
     }
@@ -169,7 +176,7 @@ public class PlayerController : MonoBehaviour
   {
     DashTimeSpent += Time.fixedDeltaTime;
     float talpha = DashTimeSpent / DashDuration;
-    float scalar = 1.0f - 0.5f * talpha * talpha;
+    float scalar = 1.0f - 0.7f * talpha * talpha;
     if (DashDirection.y < 0.3f && MvCon.IsGrounded)
     {
       Vector2 direction = Mathf.Sign(DashDirection.x) * Vector2.right;
@@ -178,7 +185,7 @@ public class PlayerController : MonoBehaviour
     }
     else
     {
-      Rigid.velocity = DashSpeed * scalar * (DashDirection + (1.0f - scalar) * Vector2.down);
+      Rigid.velocity = DashSpeed * scalar * (DashDirection + 0.2f * (1.0f - scalar) * Vector2.down);
       MeleeHitbox.transform.localPosition = MeleeOffset * DashDirection;
     }
 
@@ -215,7 +222,10 @@ public class PlayerController : MonoBehaviour
         otherHealth.DealDamage(MeleeDamage);
         if (otherHealth.BloodSplatPrefab)
         {
-          Instantiate(otherHealth.BloodSplatPrefab, MeleeHitbox.transform.position, Quaternion.FromToRotation(Vector3.right, -DashDirection));
+          GameObject obj = Instantiate(otherHealth.BloodSplatPrefab
+            , 0.5f * (MeleeHitbox.transform.position + other.transform.position)
+            , Quaternion.FromToRotation(Vector3.right, -DashDirection)
+            );
         }
       }
     }
