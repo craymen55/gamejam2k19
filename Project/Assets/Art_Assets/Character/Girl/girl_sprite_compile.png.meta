@@ -108,12 +108,12 @@ TextureImporter:
       name: girl_sprite_compile_0
       rect:
         serializedVersion: 2
-        x: 46
-        y: 548
+        x: 32
+        y: 1059
         width: 401
         height: 428
       alignment: 9
-      pivot: {x: 0.5430669, y: 0.5047469}
+      pivot: {x: 0.5811166, y: 0.51187676}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,12 +129,12 @@ TextureImporter:
       name: girl_sprite_compile_1
       rect:
         serializedVersion: 2
-        x: 123
-        y: 16
+        x: 120
+        y: 530
         width: 217
         height: 484
       alignment: 9
-      pivot: {x: 0.6029917, y: 0.52098906}
+      pivot: {x: 0.63111687, y: 0.5178365}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,10 +150,10 @@ TextureImporter:
       name: girl_sprite_compile_2
       rect:
         serializedVersion: 2
-        x: 602
-        y: 243
+        x: 608
+        y: 719
         width: 356
-        height: 622
+        height: 662
       alignment: 9
       pivot: {x: 0.49714625, y: 0.42487103}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,6 +163,90 @@ TextureImporter:
       bones: []
       spriteID: 9a28c50a7ad310242affc9b567a0bea7
       internalID: 7945085462364377303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: girl_sprite_compile_3
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 15
+        width: 328
+        height: 492
+      alignment: 9
+      pivot: {x: 0.46278548, y: 0.45968434}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8c04d7f42a5e6340a14e25ab7088823
+      internalID: 2794544664375671111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: girl_sprite_compile_4
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 17
+        width: 613
+        height: 422
+      alignment: 9
+      pivot: {x: 0.36559063, y: 0.5216937}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20898e6c4553eb648a3f8f91d4b89f70
+      internalID: 6309980417782459891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: girl_sprite_compile_5
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 1083
+        width: 311
+        height: 399
+      alignment: 9
+      pivot: {x: 0.32338074, y: 0.4923518}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d3a2edfa449d9b418a14b928b3863cf
+      internalID: 1875519071256279266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: girl_sprite_compile_6
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 581
+        width: 337
+        height: 280
+      alignment: 9
+      pivot: {x: 0.3460621, y: 0.5272463}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04399ecf8f5a7de49b7dddee9b1dda37
+      internalID: 2268990570540499079
       vertices: []
       indices: 
       edges: []

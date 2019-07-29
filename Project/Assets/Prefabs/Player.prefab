@@ -244,7 +244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Max: 50
-  BloodSplatPrefab: {fileID: 0}
+  BloodSplatPrefab: {fileID: 8412193147716449150, guid: 308f707ee10e889429284e452f868b15,
+    type: 3}
 --- !u!114 &2842150118959143696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +284,10 @@ MonoBehaviour:
   - {fileID: -1763966976518359187, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
   - {fileID: 3769857309982954817, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
   - {fileID: 7945085462364377303, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
+  - {fileID: 2794544664375671111, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
+  - {fileID: 6309980417782459891, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
+  - {fileID: 1875519071256279266, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
+  - {fileID: 2268990570540499079, guid: fbf59752c10984c4881412e5cdc0861f, type: 3}
   SpriteRenderer: {fileID: 0}
 --- !u!1 &3727336666953897568
 GameObject:
