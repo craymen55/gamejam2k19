@@ -6,11 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CharacterSprite))]
+[RequireComponent(typeof(CharacterAudioManager))]
 public class PlayerController : MonoBehaviour
 {
   Rigidbody Rigid;
   MovementController MvCon;
   CharacterSprite ChSpr;
+  CharacterAudioManager ChAu;
 
   public float InputGraceDuration = 0.1f;
   struct ActionState
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
     MvCon = GetComponent<MovementController>();
     Rigid = GetComponent<Rigidbody>();
     ChSpr = GetComponent<CharacterSprite>();
+    ChAu = GetComponent<CharacterAudioManager>();
 
     MeleeOffset = MeleeHitbox.localPosition.x;
   }
@@ -115,6 +118,16 @@ public class PlayerController : MonoBehaviour
       DashAttackAction.IsActive = true;
       DashTimeSpent = 0.0f;
       DashDirection = moveInput.normalized;
+    }
+
+    // Update audio state
+    if(moveInput.magnitude > 0.5f && !ChAu.GetMoving())
+    {
+      ChAu.SetMoving(true);
+    }
+    else if(moveInput.magnitude < 0.5f && ChAu.GetMoving())
+    {
+      ChAu.SetMoving(false);
     }
 
     // Update animation state
